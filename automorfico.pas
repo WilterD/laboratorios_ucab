@@ -1,32 +1,109 @@
 program automorfico;
-    uses crt,math;
-    var num,pot,i,longpot,longnum:integer;
-      potcadena,numcadena:string;
-      decision:boolean;
+uses crt;
+
+
+
+var  cifras,conteo,divisor1,divisor2,oper1,oper2,oper3,comprobar,i,num1,aux1,cuadrado,cubo,cuatro:integer;
+     salir,ingresar:boolean;
+     continuar:char;
+
+
 begin
-  writeln('ingrese un numero para comprobar si es automorfico ');
-  readln(num);
-  for i:=1 to 4 do
-    begin
-      pot:=num**i;
-      writeln(' el resultado es: ',pot);       //potencia del numero ingresado por el usuario//
 
-      str (pot,potcadena);                     //transformo la potencia en cadena//
-      longpot:=length(potcadena);              //guardo la longitud de la cadena
-      str(num,numcadena);                      //transformo el numero ingresado por el usuario a cadena//
-      longnum:=length(numcadena);              //guardo la longitud del numero ingresado por el usuario//
-      longpot:=longpot-longnum;                //realizo la resta de la longitud de la potencia menos la longitud del numero ingresado por el usuario//
-      delete (potcadena,1,longpot);            //elimino el excedente de la cadena//
-      if potcadena=numcadena then
-        decision:=true
-      else
-        decision:=false;
 
-    end;
 
- if decision=true then
-  writeln( 'el numero es automorfico ')
- else
-   writeln( 'el numero no es automorfico ');
-  readkey;
+  ingresar:=true;
+
+  while ingresar=true do
+  begin
+     // INICIALIZAR
+      cifras:=0;
+      oper1:=0;
+      oper2:=0;
+      oper3:=0;
+      num1:=0;
+      aux1:=0;
+      divisor1:=0;
+      divisor2:=0;
+      cubo:=0;
+      cuadrado:=0;
+      cuatro:=0;
+      comprobar:=0;
+      continuar:=' ';
+
+
+       writeln('Escribe un numero para saber si es automorfico');
+       readln(num1);
+
+       aux1:=num1; // tenemos el numero original en aux1
+
+      cuadrado:=num1*num1;   // elevacion al cuadrado tambien se puede usar sqr()
+      cubo:=num1*num1*num1;
+      cuatro:= num1*num1*num1*num1;
+      Writeln(num1);
+      conteo:=1;     // para determinar cuantas cifras tengo en el numero ingresado
+      salir:=true;
+
+
+      while salir=true do
+      begin
+           cifras:=(num1 div 10);    // voy quitando digitos
+           num1:=cifras;
+           if cifras=0 then         // si se cumple ya es la ultima vuelta
+              salir:=false
+               else
+               conteo:=conteo+1;      //voy contando digitos
+       end;
+
+       // ya tengo las cifras
+
+      divisor2:=10;
+      // este paso para obtener el divisor
+     if conteo>1 then // si la cifra es mayor que 1
+        begin
+             for i:=2 to conteo do  //2
+                 begin
+                      divisor1:=divisor2*10;
+                      divisor2:=divisor1; // determinar el divisor por cada numero de vueltas se agrega un cero
+                end;
+        end
+     else
+      divisor2:=10; // si la cifra es 1
+
+     //cuando dividimos un numero entre 100 dara 2 decimales entre 1000 tres decimales, por eso determinamos el divisor y
+     // antes sabemos de cuantas cifras son
+
+     // Comienzo de cada operacion
+
+      oper1:=(cuadrado mod divisor2);   // obtener resto
+       if oper1=aux1 then
+         comprobar:=comprobar+1;
+
+        oper2:=(cubo mod divisor2);
+       if oper2=aux1 then
+         comprobar:=comprobar+1;
+
+       oper3:=(cuatro mod divisor2);
+       if oper3=aux1 then
+         comprobar:=comprobar+1;
+
+
+        if comprobar=3 then // si se comprueba los tres casos entonces, es un numero automorfico
+         writeln('Es un numero automorfico')
+         else
+         writeln('No es un numero automorfico');
+
+        writeln;
+
+        writeln('Deseas verificar otro numero?');
+        writeln('Continuar (Y) SALIR (N)');
+        readln(continuar);
+
+        if (continuar='N') or (continuar='n') then
+         ingresar:=false
+         else
+         clrscr;
+
+  end;
+
 end.
