@@ -1,16 +1,11 @@
 program automorfico;
 uses crt;
 
-
-
-var  cifras,conteo,divisor1,divisor2,oper1,oper2,oper3,comprobar,i,num1,aux1,cuadrado,cubo,cuatro:integer;
+var  cifras,conteo,divisor2,oper1,oper2,oper3,comprobar,i,num1,aux1,cuadrado,cubo,cuatro:integer;
      salir,ingresar:boolean;
      continuar:char;
 
-
 begin
-
-
 
   ingresar:=true;
 
@@ -32,15 +27,15 @@ begin
       continuar:=' ';
 
 
-       writeln('Escribe un numero para saber si es automorfico');
-       readln(num1);
+      writeln('Escribe un numero para saber si es automorfico');
+      readln(num1);
 
-       aux1:=num1; // tenemos el numero original en aux1
+      aux1:=num1; // tenemos el numero original en aux1
 
       cuadrado:=num1*num1;   // elevacion al cuadrado tambien se puede usar sqr()
       cubo:=num1*num1*num1;
-      cuatro:= num1*num1*num1*num1;
-      Writeln(num1);
+      cuatro:=num1*num1*num1*num1;
+
       conteo:=1;     // para determinar cuantas cifras tengo en el numero ingresado
       salir:=true;
 
@@ -60,13 +55,8 @@ begin
       divisor2:=10;
       // este paso para obtener el divisor
      if conteo>1 then // si la cifra es mayor que 1
-        begin
              for i:=2 to conteo do  //2
-                 begin
-                      divisor1:=divisor2*10;
-                      divisor2:=divisor1; // determinar el divisor por cada numero de vueltas se agrega un cero
-                end;
-        end
+                      divisor2:=divisor2*10;
      else
       divisor2:=10; // si la cifra es 1
 
