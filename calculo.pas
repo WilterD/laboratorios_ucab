@@ -1,7 +1,7 @@
 program calculo;
 uses crt;
 var
-  edad,n_personas,kilo,gramos,metros,centimetros,jovenes,adulto,mayor,contador:integer;
+  edad,n_personas,kilo,gramos,metros,centimetros,jovenes,adulto,mayor:integer;
 
   EdadP,PesoK,PesoPJ,EstaP,PesoG,Centi_P,gramos_j:real;
   continuar:char;
@@ -26,18 +26,22 @@ begin
        mayor:=0;
        adulto:=0;
        continuar:=' ';
-       salir:=true;  //Estrucutra de control while
+       salir:=true;  //Estructura de control while
 
+       writeln('Bienvenido Al Sistema calculador');
+       writeln;
 
   While salir=true do
   begin
-       writeln('Bienvenido Al Sistema calculador');
-       writeln('Cuantas personas seran evaluadas?');
-       read(n_personas);
-       contador:=0;
-       repeat
-          contador:=contador+1;
-          Writeln('Ingrese los datos de la persona numero: ',contador);
+          writeln('Desea ingresar los datos de una persona? (Y)SI (N)NO');
+          readln(continuar);
+
+         if (continuar='N') or (continuar='n') then
+            salir:=false
+         else
+         begin
+          n_personas:=n_personas+1;
+          Writeln('Ingrese los datos de la persona numero: ',n_personas);
           writeln('Ingrese Su Edad');
           readln(edad);
 
@@ -56,8 +60,9 @@ begin
            EdadP:=EdadP+edad;                // contar edades
            PesoK:=PesoK+kilo;               // contar pesos de las personas (kilos)
            PesoG:=PesoG+gramos;            // contar gramos peso
-           EstaP:=EstaP+metros;           //  contar estaturas de las personas
+           EstaP:=EstaP+metros;           // contar estaturas de las personas
            Centi_P:=Centi_P+centimetros; // contar centimetros estatura
+
 
 
            if (edad>17) and (edad<26) then
@@ -74,19 +79,29 @@ begin
 
            clrscr; // limpiar pantalla
 
-       until contador=n_personas;
 
-       if adulto>0 then // calculamos el promedio si existen personas de estas edades
-                   begin
-                        gramos_j:=(gramos_j/adulto);   // promedio gramos jovenes
-                        PesoPJ:=(PesoPJ/adulto);      // obtener peso de jovenes promedios
-                   end;
 
-       EdadP:=(EdadP/n_personas);            // obtener promedio de edad
-       PesoK:=(PesoK/n_personas);           // obtener promedio (Kilos)
-       EstaP:=(EstaP/n_personas);          // obtener estatura promedio
-       PesoG:=(PesoG/n_personas);         // promedio de gramos
-       Centi_P:=(Centi_P/n_personas);    // promedio de centimetros total
+           if adulto>0 then // calculamos el promedio si existen personas de estas edades
+                       begin
+                            gramos_j:=(gramos_j/adulto);   // promedio gramos jovenes
+                            PesoPJ:=(PesoPJ/adulto);      // obtener peso de jovenes promedios
+                       end;
+
+          end;
+   end;
+
+       if n_personas=0 then
+       writeln('Tenga un buen dia usuario, vuelta pronto! ')
+       readkey
+       else
+       begin
+
+
+         EdadP:=(EdadP/n_personas);                 // obtener promedio de edad
+         PesoK:=(PesoK/n_personas);           // obtener promedio (Kilos)
+         EstaP:=(EstaP/n_personas);          // obtener estatura promedio
+         PesoG:=(PesoG/n_personas);         // promedio de gramos
+         Centi_P:=(Centi_P/n_personas);    // promedio de centimetros total
 
         writeln('Edad Promedio de todas las personas: ',EdadP:0:0);
         writeln;
@@ -95,9 +110,7 @@ begin
         writeln('Estatura Promedio de todas las personas: ',EstaP:0:0,',',Centi_P:2:0);
         writeln;
 
-        (*d) Cuantas personas hay con edad entre los 18 y 25 años.
-         e) Cuantas personas hay con edad desde 36 años en adelante.
-         f) Cual es el promedio de peso de las personas con edades entre 18 y 35 años*)
+
 
         if (jovenes=0) and (adulto=0) then
             writeln('No hay personas de entre 18 y 35 anos')
@@ -106,20 +119,7 @@ begin
              else if adulto>0 then
                 writeln('Peso Promedio de las personas entre 18 y 35 anos: ',PesoPJ:3:0,',',gramos_j:3:0);
 
-
-        writeln;
-        writeln;
-        writeln('Desea realizar otros calculos?'); // Seguir Bucle o terminar
-        writeln;
-        writeln('SI(Y) NO (N)');
-        readln(continuar);
-
-         if (continuar='N') or (continuar='n') then
-            salir:=false
-            else
-              clrscr;
-
-   end;
-
+          readkey;
+       end;
 end.
 
