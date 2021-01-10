@@ -180,9 +180,9 @@ begin
         end;
       end;
       2:begin
-       writeln('Las 5 canciones mas preferidas por mujeres son: ');
-       clrscr; // limpiar pantalla
 
+       clrscr; // limpiar pantalla
+       writeln('Las 5 canciones mas preferidas por mujeres son: ');
             anterior:=100;         // inicializo la variable en un numero grande
             mayor:=0;             // la inicializo en un numero pequeño
 
@@ -193,12 +193,15 @@ begin
                   mayor:=votos[j,1];
 
 
-              for j:=1 to 10 do        // escribire el nombre de la cancion que tenga mas votos
+              for j:=1 to 5 do        // escribire el nombre de la cancion que tenga mas votos
               begin
                 if votos[j,1] = mayor then
                   begin
-                  write(nombresC[j]);
-                  writeln;
+                    if votos[j,1]>0 then  // si tiene mas de 0 votos escribir
+                      begin
+                        write(nombresC[j]);
+                        writeln;
+                      end;
                   end;
               end;
 
